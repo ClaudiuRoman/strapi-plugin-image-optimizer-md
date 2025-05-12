@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const pluginId_1 = __importDefault(require("../utils/pluginId"));
 class SettingsService {
     static get settings() {
+        //@ts-ignore
         return strapi.config.get(`plugin.${pluginId_1.default}`);
     }
 }

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const yup_1 = require("yup");
+//@ts-ignore
 const sharp_1 = require("sharp");
 const imageFormats = [
     "avif",

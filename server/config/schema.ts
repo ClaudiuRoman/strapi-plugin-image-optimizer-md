@@ -1,4 +1,5 @@
 import { array, boolean, mixed, number, object, string } from "yup";
+//@ts-ignore
 import { fit as FitEnum } from "sharp";
 
 const imageFormats = [
@@ -54,7 +55,7 @@ const configSchema = object({
       fit: mixed().oneOf(Object.values(FitEnum)),
       position: mixed().oneOf(positions),
       withoutEnlargement: boolean(),
-    })
+    }),
   ),
   quality: number().min(0).max(100),
 });

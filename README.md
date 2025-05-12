@@ -1,6 +1,11 @@
 # Fix for Strapi v5
 Copy of repository https://github.com/marlokessler/strapi-plugin-image-optimizer to fix the errors for strapi v5
 
+1. Make changes
+2. Run yarn build
+3. Push to git to a new branch
+4. Install package from branch into the strapi project yarn add https://github.com/MDSilviu/strapi-plugin-image-optimizer-md.git#fix-v5.0-1
+
 ---
 
 <img src="assets/logo.png" alt="image optimizer logo" width="75"/>

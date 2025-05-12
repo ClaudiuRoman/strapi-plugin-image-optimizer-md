@@ -3,10 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+//@ts-ignore
 const fs_1 = require("fs");
-const path_1 = require("path");
-const sharp_1 = __importDefault(require("sharp"));
+//@ts-ignore
 const utils_1 = require("@strapi/utils");
+//@ts-ignore
+const path_1 = require("path");
+//@ts-ignore
+const sharp_1 = __importDefault(require("sharp"));
 // @ts-ignore - No types available
 const strapi_server_1 = __importDefault(require("@strapi/upload/strapi-server"));
 const imageManipulation = (0, strapi_server_1.default)().services["image-manipulation"];
@@ -102,7 +106,9 @@ async function writeStreamToFile(sharpsStream, path) {
     return new Promise((resolve, reject) => {
         const writeStream = (0, fs_1.createWriteStream)(path);
         // Reject promise if there is an error with the provided stream
+        //@ts-ignore
         sharpsStream.on("error", reject);
+        //@ts-ignore
         sharpsStream.pipe(writeStream);
         writeStream.on("close", resolve);
         writeStream.on("error", reject);

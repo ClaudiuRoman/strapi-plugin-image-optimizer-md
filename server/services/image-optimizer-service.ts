@@ -1,19 +1,23 @@
+//@ts-ignore
 import { ReadStream, createReadStream, createWriteStream } from "fs";
+//@ts-ignore
+import { file as fileUtils } from "@strapi/utils";
+//@ts-ignore
 import { join } from "path";
-import sharp, { Sharp, Metadata } from "sharp";
-import { file as fileUtils } from '@strapi/utils';
+//@ts-ignore
+import sharp, { Metadata, Sharp } from "sharp";
 
 // @ts-ignore - No types available
 import pluginUpload from "@strapi/upload/strapi-server";
 const imageManipulation = pluginUpload().services["image-manipulation"];
 
 import {
-  OutputFormat,
-  ImageSize,
   File,
+  ImageSize,
+  OutputFormat,
   SourceFile,
-  StrapiImageFormat,
   SourceFormat,
+  StrapiImageFormat,
 } from "../models";
 import settingsService from "./settings-service";
 
@@ -48,7 +52,7 @@ async function optimizeImage(file: SourceFile): Promise<StrapiImageFormat[]> {
       if (additionalResolutions) {
         additionalResolutions.forEach((resizeFactor) => {
           imageFormatPromises.push(
-            generateImage(file, format, size, quality, resizeFactor)
+            generateImage(file, format, size, quality, resizeFactor),
           );
         });
       }
@@ -63,7 +67,7 @@ async function generateImage(
   format: OutputFormat,
   size: ImageSize,
   quality: number,
-  resizeFactor = 1
+  resizeFactor = 1,
 ): Promise<StrapiImageFormat> {
   const resizeFactorPart = resizeFactor === 1 ? "" : `_${resizeFactor}x`;
   const sizeName = `${size.name}${resizeFactorPart}`;
@@ -76,7 +80,7 @@ async function generateImage(
       format,
       size,
       quality,
-      resizeFactor
+      resizeFactor,
     ),
   };
 }
@@ -87,7 +91,7 @@ async function resizeFileTo(
   format: OutputFormat,
   size: ImageSize,
   quality: number,
-  resizeFactor: number
+  resizeFactor: number,
 ): Promise<File> {
   let sharpInstance = sharp();
   if (format !== "original") {
@@ -98,7 +102,7 @@ async function resizeFileTo(
     sharpInstance,
     size,
     resizeFactor,
-    sourceFile
+    sourceFile,
   );
 
   const imageHash = `${sizeName}_${format}_${sourceFile.hash}`;
@@ -124,7 +128,7 @@ async function resizeFileTo(
 
 function sharpAddFormatSettings(
   sharpInstance: Sharp,
-  { quality }: { quality?: number }
+  { quality }: { quality?: number },
 ): Sharp {
   // TODO: Add jxl when it's no longer experimental
   return sharpInstance
@@ -144,7 +148,7 @@ function sharpAddResizeSettings(
   sharpInstance: Sharp,
   size: ImageSize,
   factor: number,
-  sourceFile: SourceFile
+  sourceFile: SourceFile,
 ): Sharp {
   const originalSize = !size.width && !size.height;
   const { width, height } = originalSize
@@ -165,7 +169,9 @@ async function writeStreamToFile(sharpsStream: Sharp, path: string) {
   return new Promise((resolve, reject) => {
     const writeStream = createWriteStream(path);
     // Reject promise if there is an error with the provided stream
+    //@ts-ignore
     sharpsStream.on("error", reject);
+    //@ts-ignore
     sharpsStream.pipe(writeStream);
     writeStream.on("close", resolve);
     writeStream.on("error", reject);

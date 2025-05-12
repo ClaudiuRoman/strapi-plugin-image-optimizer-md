@@ -4,9 +4,9 @@ declare const configSchema: import("yup").ObjectSchema<{
     formats: {}[];
     include: {}[];
     sizes: {
-        name?: string;
         width?: number;
         height?: number;
+        name?: string;
         fit?: {};
         position?: {};
         withoutEnlargement?: boolean;

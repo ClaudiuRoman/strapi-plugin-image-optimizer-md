@@ -1,3 +1,4 @@
+//@ts-ignore
 import { ReadStream } from "fs";
 
 export interface File {
