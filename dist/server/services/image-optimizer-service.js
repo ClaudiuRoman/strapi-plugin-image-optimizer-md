@@ -85,7 +85,7 @@ function sharpAddFormatSettings(sharpInstance, { quality }) {
     })
         .webp({ quality, force: false })
         .avif({ quality, force: false })
-        .heif({ quality, force: false })
+        .heif({ compression: "av1", quality, force: false })
         .tiff({ quality, force: false });
 }
 function sharpAddResizeSettings(sharpInstance, size, factor, sourceFile) {
